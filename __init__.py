@@ -39,6 +39,8 @@ def login():
             return '로그인 실패'
     return render_template('login.html',msg='testing now')
 
+def logins():
+    print('git branch test')
 # @app.route('/notice/share',methods=['GET','POST'])
 # def share_notice():
 #     pass
