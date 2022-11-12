@@ -82,7 +82,6 @@ def login():
             return '로그인 실패'
     return render_template('login.html',msg='testing now')
 
-@ap
 # @app.route('/notice/share',methods=['GET','POST'])
 # def share_notice():
 #     pass
@@ -109,7 +108,7 @@ def file():
         name = file.filename
         with open(name,'wb') as F:
             F.write(f)
-        return redirect(main)
+        return redirect('/login')
 
     return '''<form action="/file_upload" method="POST" enctype = "multipart/form-data">
             <input type = "file" name = "file" />            
