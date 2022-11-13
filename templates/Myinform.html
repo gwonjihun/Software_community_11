@@ -1,0 +1,95 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<title>개인 정보 수정</title>
+<link rel="icon" type="image/x-icon" href="./img/loco.png" />
+<link href="css/bootstrap.css" rel="stylesheet" />
+<style>
+@font-face {
+  font-family:"jua";
+  src: url("./font/BMJUA_ttf.ttf");
+}
+*{
+  font-family: "jua" !important;
+}
+
+html,body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  max-width: 600px;
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+
+ </style>
+</head>
+<body class="text-center">
+	<main class="form-signin w-100 m-auto">
+		<img class="mb-4" src="./img/logow.png" alt="" width="150" height="150">
+		<h1 class="h3 mb-3 fw-normal">"닮은 것을 담다"</h1>
+		<h5 class="text-start">회원 정보</h5>
+		<input type="hidden" name="uid" value="">
+		<div class="d-grid gap-3">
+			<div class="form-group">
+				<div class="mb-2">
+				<label class="col-sm-2 control-label">아이디 </label></div>
+				<input type="text" disabled name="i" class="form-control" value="ID">
+			</div>
+			<div class="hr-line-dashed"></div>
+				<div class="form-group ">
+					<div class="mb-3">
+					<label class="col-sm-2 control-label mb-2">닉네임</label>
+					<input type="text" name="n" class="form-control" value="리이준석"></div>
+					<h1 class="h6 mb-3 fw-normal">닉네임 중복 여부를 확인해주세요. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-sm btn-outline-primary">중복확인</button></h1>
+			</div>
+			<div class="hr-line-dashed"></div>
+				<div class="form-group">
+					<div class="mb-3 ">
+					<label class="col-sm-3 control-label md-2">현재 비밀번호<br></label>
+					<input type="password" class="form-control curr_pw" placeholder="현재 비밀번호" required="" id="curr_pw" name="np"></div>
+					<h1 class="h6 mb-3 fw-normal">정보를 변경하려면 현재 비밀번호를 입력하세요. <label class="col-sm-2 control-label"><input type="checkbox" value="ok"> 변경 확인</label></h1>
+				</div>
+			<div class="hr-line-dashed"></div>
+			<div class="mb-3 ">
+				<label class="col-sm-5 control-label">변경할 비밀번호를 입력하세요.</label>
+				<input type="password" disabled class="form-control chg_pw" placeholder="변경 비밀번호" required="" id="chg_pw" name="cp">
+			</div>
+			<div class="mb-3 ">
+				<label class="col-sm-5 control-label">소개</label>
+				<textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+			  </div>
+			<div>
+			<h1 class="h6 mb-3 fw-normal">쪽지 수신 여부를 선택 할 수 있습니다. &nbsp;&nbsp;
+				<input type="checkbox" value="ok"></h1>
+		</div>
+			<div class="form-group">
+				<button id="form1_submit" class="btn btn-primary" type="button">변경하기</button>
+				<button id="form1_closed" class="btn btn-danger pull-right" type="button">탈퇴하기</button>
+				<label id="form1_result"></label>
+			</div>
+		</div>
+</main>
+</body>
+</html>
