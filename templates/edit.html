@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>닮다담다 - 게시글 수정</title>
+    <link rel="stylesheet" href="../static/css/board_style.css">
+
+    <!--  jQuery, bootstrap -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+
+    <!-- summernote css/js-->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+
+</head>
+<body>
+    <div class="header_wrap">
+
+    </div>
+    <div class="board_wrap">
+        <div class="board_title">
+            <strong>게시글 수정</strong>
+        </div>
+        <div class="board_write_wrap">
+            <div class="board_write">
+                <div class="title">
+                    <dl>
+                        <dt>제목</dt>
+                        <dd><input type="text" placeholder="제목 입력" value="글 제목이 들어갑니다"></dd>
+                    </dl>
+                </div>
+                <div class="cont" id="summernote">
+                    <script>
+                        // 메인화면 페이지 로드 함수
+                        $(document).ready(function () {
+                            $('#summernote').summernote({
+                                placeholder: '내용을 작성하세요',
+                                height: 300,
+                                minHeight: 300,
+                                maxHeight: 400
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="bt_wrap">
+                <a href="view.html" class="on">수정</a>
+                <a href="view.html">취소</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
