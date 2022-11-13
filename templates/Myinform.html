@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,83 +90,6 @@ body {
 				<label id="form1_result"></label>
 			</div>
 		</div>
-</form>
-</div>
-<!-- <script>
-$(document).ready(function () {
-	$('.i-checks').iCheck({
-		checkboxClass: 'icheckbox_square-green',
-		radioClass: 'iradio_square-green',
-	});
-	
-	$('.i-checks').on('ifChecked', function(event){
-			$('.chg_pw').removeAttr("disabled");
-	});
-	$('.i-checks').on('ifUnchecked', function(event){
-			$('.chg_pw').val('');
-			$('.chg_pw').attr({"disabled":""});
-	});
-
-	$('#form1_submit').click(function () {
-		if($('.curr_pw').val()=="")
-		{
-			alert("현재 비밀번호를 입력하세요.");
-		}
-		else
-		{
-			$.ajax({
-						type : "POST",
-						url : "user/info_save.php",
-						data : $("#form1").serialize(),
-						success : function(data){
-							$("#form1_result").text(data);
-							$("#form1_result").show();
-							$( "#form1_result" ).fadeOut(5000, function() {
-								// Animation complete.
-							  })
-						}
-			});
-		}
-	});
-	
-	$('#form1_closed').click(function () {
-		if($('.curr_pw').val()=="")
-		{
-			alert("현재 비밀번호를 입력하세요.");
-		}
-		else
-		{
-			swal({
-				title: "탈퇴하시겠습니까?",
-				text: "탈퇴하면 회원 정보가 삭제되며 복구할 수 없습니다!",
-				type: "warning",
-				showCancelButton: true,
-				confirmButtonColor: "#DD6B55",
-				confirmButtonText: "네, 탈퇴할게요!",
-				cancelButtonText: "취소" ,
-				closeOnConfirm: false,
-			}, function () {
-				$.ajax({
-						type : "POST",
-						url : "user/info_close.php",
-						data : $("#form1").serialize(),
-						success : function(data){
-							if(data=="true")
-							{
-								swal("탈퇴되었습니다!", "회원 정보가 삭제되었습니다.", "success");
-								window.location.href = "/";
-							}
-							else
-							{
-								swal("실패!", "탈퇴에 실패하였습니다. 현재 비밀번호가 틀렸거나 로그인 정보가 올바르지 않습니다. 다시 로그인 후 시도해 주세요.", "error");
-							}
-						}
-				});
-			});
-		}
-	});
-});
-</script> -->
 </main>
 </body>
 </html>
