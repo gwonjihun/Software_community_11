@@ -82,6 +82,25 @@ def login():
             return '로그인 실패'
     return render_template('login.html',msg='testing now')
 
+#  get all은 쪽지함 조회 클릭시 기본적으로 보여주는 곳
+@app.route('/note/all',methods=['GET','POST'])
+def notes():
+    if session['user_id']:
+        return redirect('/',406)
+
+@app.route('/',methods='GET')
+def mains():
+    if session['user_id']:
+        return render_template('main.html',user_id=session['user_id'])
+    else:
+        return render_template('main.html')
+
+@app.route('/analysis',methods='POST')
+def analysis():
+    if session['user_id']:
+        pass
+    else:
+        print('비회원 처리 이거는 method불러와서 처리해줘도 되는거임')
 # @app.route('/notice/share',methods=['GET','POST'])
 # def share_notice():
 #     pass
@@ -94,25 +113,5 @@ def login():
 # def my_page():
 #     pass
 
-@app.route('/file_upload',methods = ['GET','POST'])
-def file():
-    return '''<form action="/file_upload" method="POST" enctype = "multipart/form-data">
-            <input type = "file" name = "file" />            
-            <input type='submit'>
-            '''
-@app.route('/file_upload',methods = ['GET','POST'])
-def file():
-    if request.method == 'POST':
-        file = request.files['file']
-        f = file.read()
-        name = file.filename
-        with open(name,'wb') as F:
-            F.write(f)
-        return redirect('/login')
-
-    return '''<form action="/file_upload" method="POST" enctype = "multipart/form-data">
-            <input type = "file" name = "file" />            
-            <input type='submit'>
-            '''
 if __name__== '__main__':
     app.run(debug = True, port=8080)

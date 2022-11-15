@@ -87,7 +87,7 @@ class Note_Dao:
         db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         curs = db.cursor()
         
-        sql = f'''insert customers values(null,"{sender_id}", "{receiver_id}", "{title}", "{content}", "{create_at}");'''
+        sql = f'''insert customers values(null,"{sender_id}", "{receiver_id}", "{content}", "{create_at}");'''
         print(sql)
         try:
             curs.execute(sql)
@@ -102,7 +102,7 @@ class Note_Dao:
         db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         curs = db.cursor()
         
-        sql =f'''select receiver_id, title, create_at from note_table where sender_id = "{sender_id}" order by create_at desc;'''
+        sql =f'''select receiver_id,  create_at from note_table where sender_id = "{sender_id}" order by create_at desc;'''
         try:
             curs.execute(sql)
             result = curs.fetchall()
@@ -113,11 +113,11 @@ class Note_Dao:
         return result
 
     # 수신 쪽지 내용 조회
-    def detail_view(sender_id,receiver_id,title,create_at):
+    def detail_view(sender_id,receiver_id,create_at):
         db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         curs = db.cursor()
         
-        sql =f'''select sender_id,receiver_id, title, content, create_at from note_table where sender_id = "{sender_id}" and  receiver_id = "{receiver_id}" and create_at= "{create_at}";'''
+        sql =f'''select sender_id,receiver_id,  content, create_at from note_table where sender_id = "{sender_id}" and  receiver_id = "{receiver_id}" and create_at= "{create_at}";'''
         try:
             curs.execute(sql)
             result = curs.fetchall()
@@ -131,7 +131,7 @@ class Note_Dao:
         db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         curs = db.cursor()
         
-        sql =f'''select receiver_id, title, create_at, delete_at from note_table where sender_id = "{sender_id}" order by create_at desc;'''
+        sql =f'''select receiver_id, create_at, delete_at from note_table where sender_id = "{sender_id}" order by create_at desc;'''
         try:
             curs.execute(sql)
             result = curs.fetchall()
@@ -147,7 +147,7 @@ class Note_Dao:
         db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         curs = db.cursor()
         
-        sql =f'''select receiver_id, title, create_at from note_table where sender_id = "{sender_id}" order by create_at desc;'''
+        sql =f'''select receiver_id, content, create_at from note_table where sender_id = "{sender_id}" order by create_at desc;'''
         try:
             curs.execute(sql)
             result = curs.fetchall()
