@@ -12,7 +12,7 @@
 <style>
 @font-face {
   font-family:"jua";
-  src: url("../static/font/BMJUA_ttf.ttf");
+  src: url("../static/css/junseok/font/BMJUA_ttf.ttf");
 }
 *{
   font-family: "jua" !important;
@@ -25,13 +25,11 @@ html,body {
 body {
   display: flex;
   align-items: center;
-  padding-top: 40px;
   padding-bottom: 40px;
   background-color: #f5f5f5;
 }
 
 .form-signin {
-  max-width: 600px;
   padding: 15px;
   background-color: #ffffff;
   border-radius: 10px;
@@ -40,13 +38,53 @@ body {
 .form-signin .form-floating:focus-within {
   z-index: 2;
 }
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #000;
+	background-color: #d1d1d1;
+	padding: 1em;
+}
+.header .head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.header .head h1 {
+	font-size: 24px;
+}
+.header .head .navi {
+	margin-left: 30px;
+}
+.header .head .navi a {
+	display: inline-flex;
+	margin: 0 1em;
+}
+.header .side_menu a {
+	display: inline-flex;
+	margin: 0 0 0 1em;
+}
 
 
  </style>
 </head>
 <body class="text-center">
 	<main class="form-signin w-100 m-auto">
-		<img class="mb-4" src="../static/img/logow.png" alt="" width="150" height="150">
+		  	<header class="header">
+			<div class="head">
+				<h1>닮는 것을 담다</h1>
+				<nav class="navi">
+					<a href="#">자유 게시판</a>
+					<a href="#">결과 게시판</a>
+				</nav>
+			</div>
+			<div class="side_menu">
+				<a href="#">로그인</a>
+				<a href="#">회원가입</a>
+			</div>
+		</header>
+		<img class="mb-4" src="./img/logow.png" alt="" width="150" height="150">
 		<h1 class="h3 mb-3 fw-normal">"닮은 것을 담다"</h1>
 		<h5 class="text-start">회원 정보</h5>
 		<input type="hidden" name="uid" value="">
@@ -57,7 +95,7 @@ body {
 				<input type="text" disabled name="i" class="form-control" value="ID">
 			</div>
 			<div class="hr-line-dashed"></div>
-				<div class="form-group ">
+				<div class="form-group">
 					<div class="mb-3">
 					<label class="col-sm-2 control-label mb-2">닉네임</label>
 					<input type="text" name="n" class="form-control" value="리이준석"></div>
@@ -76,10 +114,6 @@ body {
 				<label class="col-sm-5 control-label">변경할 비밀번호를 입력하세요.</label>
 				<input type="password" disabled class="form-control chg_pw" placeholder="변경 비밀번호" required="" id="chg_pw" name="cp">
 			</div>
-			<div class="mb-3 ">
-				<label class="col-sm-5 control-label">소개</label>
-				<textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-			  </div>
 			<div>
 			<h1 class="h6 mb-3 fw-normal">쪽지 수신 여부를 선택 할 수 있습니다. &nbsp;&nbsp;
 				<input type="checkbox" value="ok"></h1>
