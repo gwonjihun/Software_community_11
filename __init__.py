@@ -1,9 +1,12 @@
 from flask import Flask,render_template, request, redirect, url_for, session,make_response,jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from model import Customer_DAO
-
-
+from predict import CelebrityPredictionModel
+from datetime import datetime
 app = Flask(__name__)
+
+
+predictor = CelebrityPredictionModel("./model")
 
 # 회우너가입에서 ID
 @app.route('/register/check/id', methods=['POST'])
@@ -30,12 +33,13 @@ def check_register_nickname():
         return redirect('/',200)
 @app.route('/',methods=['GET','POST'])
 def main_view():
+    # 
     if request.method=='POST':
         if 'user_id' in session:
-            return '회원'
+            return render_template('main.html',id = session['user_id'])
         # 비회원의 경우
         else:
-            return '비회원'
+            return render_template('main.html',id= '')
 
     elif request.method =='GET':
         return render_template('main.html')
@@ -111,6 +115,30 @@ def notes():
 # @app.route('/mypage/',methods=['GET','POST','DELETE','UPDATE'])
 # def my_page():
 #     pass
+import os 
+
+@app.route('/temp',methods=['GET','POST'])
+def temp():
+    # post 동작으로 결과 조회후 렌더링해준다
+    input_time = datetime.now()
+    # 위에는 현재시간을 알려주는 코드 
+    if request.method =='POST':
+        f = request.files['file']
+        gender = int(request.form['gender_flag'])
+        print(gender)
+        print(f.filename.split('.')[-1])
+        if f.filename.split('.')[-1] == 'jpg':
+            save_to = f'./static/img/' + input_time.strftime('%Y%m%d%H%M%S') +'.jpg'
+            # save_to = f'static/img/profiles/{user_id}'
+            f.save(save_to)
+            result = predictor.predict_img(gender,save_to)
+            if os.path.isfile(save_to):
+                os.remove(save_to)
+                print('file delete finish')
+            return render_template('tempresult.html',rank= result)
+        return render_template('temp.html')
+    else:
+        return render_template('temp.html')
 
 if __name__== '__main__':
     app.run(debug = True, port=8080)

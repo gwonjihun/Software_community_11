@@ -1,0 +1,11 @@
+<!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form action="{{url_for('temp')}}"
+    method="POST"
+    enctype="multipart/form-data">
+    <input type="file" name="file" />
+    <input type="radio" name="gender_flag" value= 0 checked /> 남자
+    <input type="radio" name="gender_flag" value= 1 /> 여자
+    <input type="submit" />
+</form>
