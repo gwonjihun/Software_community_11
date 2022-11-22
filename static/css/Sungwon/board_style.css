@@ -2,7 +2,8 @@
     margin: 0;
     padding: 0;
 }
-html{
+
+html, body{
     font-size: 10px;
 }
 
@@ -21,7 +22,37 @@ a {
 }
 /* body */
 
-
+/*Header*/
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #000;
+	background-color: #d1d1d1;
+	padding: 1em;
+}
+.header .head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.header .head h1 {
+    font-weight: bold;
+    margin:0;
+	font-size: 24px;
+}
+.header .head .navi {
+	margin-left: 30px;
+}
+.header .head .navi a {
+	display: inline-flex;
+	margin: 0 1em;
+}
+.header .side_menu a {
+	display: inline-flex;
+	margin: 0 0 0 1em;
+}
+/*Header*/
 
 
 .board_title {
@@ -51,7 +82,8 @@ a {
 }
 
 .bt_wrap a {
-    display: inline-block;
+    display: inline-flex;
+    justify-content: center;
     min-width: 80px;
     margin-left: 10px;
     padding: 10px;
@@ -59,6 +91,7 @@ a {
     border-radius: 2px;
     font-size: 1.4rem;
     text-align: center;
+    text-decoration: none;
 }
 
 .bt_wrap a:last-child {
@@ -92,8 +125,12 @@ a {
     border-bottom: 1px solid #000;
 }
 
+.board_list > div>div:first-child {
+    justify-content: center;
+}
+
 .board_list > div > div {
-    display: inline-block;
+    display: inline-flex;
     padding: 15px 0;
     text-align: center;
     font-size: 1.4rem;
@@ -147,7 +184,8 @@ a {
 }
 
 .board_page a {
-    display: inline-block;
+    display: inline-flex;
+    justify-content: center;
     width: 32px;
     height: 32px;
     box-sizing: border-box;
@@ -179,7 +217,7 @@ a {
 }
 
 .board_page_wrap>div{
-    display:inline-block;
+    display:inline-flex;
 }
 /* board_page */
 
@@ -212,7 +250,7 @@ a {
 
 .board_view .info dl {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
     padding: 0 20px;
 }
 
@@ -237,7 +275,7 @@ a {
 
 .board_view .info dl dt,
 .board_view .info dl dd {
-    display: inline-block;
+    display: inline-flex;
     font-size: 1.4rem;
 }
 
@@ -278,14 +316,14 @@ a {
 }
 
 .board_write .info dl {
-    display: inline-block;
+    display: inline-flex;
     width: 50%;
     vertical-align: middle;
 }
 
 .board_write .title dt,
 .board_write .title dd{
-    display: inline-block;
+    display: inline-flex;
     vertical-align: middle;
     font-size: 1.4rem;
 }
@@ -329,12 +367,34 @@ a {
     width: 100%;
 }
 
-#comment-count{
-    margin-bottom: 10px; 
+#form-comment{
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+#form-like{
+    margin-bottom: 10px;
+}
+
+#form-like-count{
+    background-color: red;
+    color: white;
+    padding: 3px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+#form-message{
+    background-color: green;
+    color: white;
+    padding: 3px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 10px;
 }
 
 #comment-input{
-    width: 85%;
+    width: 92%;
     height: 3.3em;
 }
 
@@ -351,5 +411,9 @@ a {
 
 #form-commentInfo>button:hover {
     background: #999;
+}
+
+#comentFuc>div{
+    display: inline-flex;
 }
 /* comment */
