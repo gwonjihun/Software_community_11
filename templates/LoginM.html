@@ -78,8 +78,7 @@ body {
     
 </style>
 
-<link href="signin.css" rel="stylesheet">
-  </head>
+</head>
 <body class="text-center">
 		
 <main class="form-signin w-100 m-auto">
@@ -98,28 +97,30 @@ body {
 				<a href="#">회원가입</a>
 			</div>
 		</header>
-    <img class="mb-4" src="./img/loco.png" alt="" width="150" height="150">
+    <img class="mb-4" src="../static/img/loco.png" alt="" width="150" height="150">
     <h1 class="h3 mb-3 fw-normal">"닮은 것을 담다"</h1>
 	<h1 class="h6 mb-3 fw-normal">테스트 결과를 공유하려면 로그인이 필요합니다.</h1>
 	<h1 class="h6 mb-3 fw-normal">이메일 주소만으로 간단히 계정 생성이 가능합니다.</h1>
-    <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" placeholder="아이디" name="userID" maxlength="20">
-      <label for="floatingInput">아이디</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">비밀번호</label>
-    </div>
-    <div class="d-grid gap-3">
+	<form action="{{ url_for('login') }}" method="POST" enctype="multipart/form-data" >
     	<div class="form-floating">
-    	<button class="w-100 btn btn-lg btn-success" type="submit">로그인</button>
-   		 </div>
+      		<input type="text" class="form-control" id="floatingInput" placeholder="아이디" name="userid" maxlength="20">
+      		<label for="floatingInput">아이디</label>
+    	</div>
     	<div class="form-floating">
-   		 <a class="w-100 btn btn-md btn-outline-success" href="Register.html">계정 생성</a>
+      		<input type="password" class="form-control" id="floatingPassword" placeholder="password" name="password">
+      		<label for="floatingPassword">비밀번호</label>
+    	</div>
+    	<div class="d-grid gap-3">
+    		<div class="form-floating">
+    		<button class="w-100 btn btn-lg btn-success" type="submit" formmethod="POST">로그인</button>
+	</form>	 
+	</div>
+    	<div class="form-floating">
+   		 <a class="w-100 btn btn-md btn-outline-success" href="{{ url_for('register') }}">계정 생성</a>
    		 </div>
    		<div class="form-floating">
    		    <h1 class="h6 mb-3 fw-normal">운영자 문의 : add@yonsei.ac.kr</h1>
-   		       <a href="Pri.html">개인정보처리방침</a>
+   		       <a href="{{ url_for('person') }}">개인정보처리방침</a>
    		</div>
 	  </div>
  

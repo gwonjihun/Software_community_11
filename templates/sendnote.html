@@ -4,29 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="../static/css/Seunghyun/fontello.css">
+  <link rel="stylesheet" href="css/fontello/css/fontello.css">
   <title>내 쪽지함</title>
     <style>
-
     .container{
-      width:450px;
+      width:1500px;
       margin:0 auto;
     }
     header{
-      margin-top: 50px;
-      padding-left: 20px;
-      font-size: 14px;
+      margin-top: 290px;
+      padding-left: 30px;
+      font-size: 17px;
       border-bottom:2px solid gray;
       color : black;
       line-height:20px;
-
     }
   /* ===== 받은쪽지, 보낸쪽지, 쪽지쓰기 효과적용===== */
-    .subtitle{
-        margin:5px;
-        border-bottom:1px solid gray;
-        padding:15px;
-    }
+  .subtitle{
+      margin-top:20px;
+      border-bottom:1px solid gray;
+      padding-left:55px;
+      height : 60px;
+  }
     .subtitle > button {
         border-radius:30px;
         border:1px solid #008CBA;
@@ -72,27 +71,33 @@
     }
 /* ===== 창닫기 버튼 효과적용==== */
 
-    .mail-list{display: flex; flex-direction: column;}
-    .mail-row{height: 60px;display:flex; flex-direction: row;justify-content: space-around; align-items: center;border-bottom: 1px solid gray;}
-    .mail-row .content{display:flex; width: 200px; text-align: left;}
-    .info{
-      padding-left:12px;
-    }
+.mail-list{display: flex; flex-direction: column;}
+.mail-row{height: 60px;display:flex; flex-direction: row;justify-content: space-around; align-items: center;border-bottom: 1px solid gray;}
+.mail-row .content{display:flex; width: 600px; text-align: left;}
+.info{
+  padding-left:12px;
+}
+.profile{
+  margin-right: 200px;
+}
+#cancell{
+  padding-left: -1000px;
+}
 
 
     .main_item{
       display:flex;
       justify-content: center;
       height : 35px;
-      margin:8px;
+      margin-top:25px;
     }
     .item1{
       background-color:#CD426B;
-      width:5px;
+      width:6px;
     }
     .item2{
       background-color:#FF88A7;
-      width :428px;
+      width :1493px;
       color : white;
       line-height:33px;
       padding-left: 17px
@@ -138,9 +143,8 @@
                   </div>
                   <div class="c-chat">쪽지내용입니다</div>
                 </div>
-                <span class="cancell">X 발송취소</span>
                 <i id="close" class="icon-trash-empty"></i>
-              </div>
+            </div>
             </div>
             <div class="mail-row">
               <div class="profile">닉네임</div>
@@ -150,20 +154,8 @@
                   </div>
                   <div class="c-chat">쪽지내용입니다</div>
                 </div>
-                <span class="cancell">X 발송취소</span>
                 <i id="close" class="icon-trash-empty"></i>
-              </div>
-              <div class="mail-row">
-                <div class="profile">닉네임</div>
-                  <div class="content_1">
-                    <div class="content">
-                        <div class="info">날짜</div>
-                    </div>
-                    <div class="c-chat">쪽지내용입니다</div>
-                  </div>
-                  <span class="cancell">X 발송취소</span>
-                  <i id="close" class="icon-trash-empty"></i>
-                </div>
+            </div>
           </div>
         </main>
       <div class="main_item">

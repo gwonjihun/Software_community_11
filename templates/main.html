@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="../static/css/jeongmin/style.css">
 </head>
 
 <body>
@@ -20,14 +20,18 @@
 				</nav>
 			</div>
 			<div class="side_menu">
+				{% if id != "" %}
 				<div class="loginInfo">
-					<a href="#">userID</a>
+					<a href="#">{{ id }}</a>
 					<a href="#">25℃</a>
 					<a href="#">개인정보 수정</a>
 					<a href="#">쪽지함</a>
+					<a href="{{ url_for('logout') }}">로그아웃</a>
 				</div>
+				{% else %}
 				<a href="#" class="login">로그인</a>
 				<a href="#">회원가입</a>
+				{% endif %}
 			</div>
 		</header>
 
@@ -36,7 +40,7 @@
 
 			<section class="container">
 				<div class="hero">
-					<a href="#"><img src="./img/그림1.jpg"></a>
+					<a href="#"><img src="../static/img/그림1.jpg"></a>
 				</div>
 
 				<div class="upload">
@@ -55,7 +59,6 @@
 			</div>
 		</main>
 	</div>
-	<script src="./main.js"></script>
 
 </body>
 
