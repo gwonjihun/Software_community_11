@@ -5,6 +5,7 @@ from model import Customer_DAO
 
 app = Flask(__name__)
 
+# 회우너가입에서 ID
 @app.route('/register/check/id', methods=['POST'])
 def check_register_userid():
     if request.method=='POST':
@@ -17,7 +18,7 @@ def check_register_userid():
 
 @app.route('/register/check/nickname', methods=['POST'])
 def check_register_nickname():
-    if session['user_id']:
+    if 'user_id' in session:
         if request.method=='POST':
             if Customer_DAO.duplicate_nickname(request.form['user_nickname']):
                 result = {'duplicate' : 'True'}
@@ -27,16 +28,17 @@ def check_register_nickname():
                 return make_response(jsonify(result,201))
     else:
         return redirect('/',200)
-@app.route('/main',methods=['GET','POST'])
+@app.route('/',methods=['GET','POST'])
 def main_view():
     if request.method=='POST':
-        if session['user_id']:
-            print(1)
+        if 'user_id' in session:
+            return '회원'
         # 비회원의 경우
         else:
-            print(2)
-    else:
-        return render_template('main')
+            return '비회원'
+
+    elif request.method =='GET':
+        return render_template('main.html')
 # @app.route('/mypage/update', methods=['POST'])
 #     # if session['user_id']:
 #     #     if request.
@@ -79,7 +81,7 @@ def register():
 @app.route('/login',methods=['GET','POST'])
 def login():
     print(request.form)
-    if session['user_id']:
+    if 'id' in session:
         return render_template('main.html')
     if request.method == 'POST':
         password = request.form['password']
@@ -97,19 +99,7 @@ def notes():
     if session['user_id']:
         return redirect('/',406)
 
-@app.route('/',methods='GET')
-def mains():
-    if session['user_id']:
-        return render_template('main.html',user_id=session['user_id'])
-    else:
-        return render_template('main.html')
 
-@app.route('/analysis',methods='POST')
-def analysis():
-    if session['user_id']:
-        pass
-    else:
-        print('비회원 처리 이거는 method불러와서 처리해줘도 되는거임')
 # @app.route('/notice/share',methods=['GET','POST'])
 # def share_notice():
 #     pass
