@@ -27,7 +27,16 @@ def check_register_nickname():
                 return make_response(jsonify(result,201))
     else:
         return redirect('/',200)
-
+@app.route('/main',methods=['GET','POST'])
+def main_view():
+    if request.method=='POST':
+        if session['user_id']:
+            print(1)
+        # 비회원의 경우
+        else:
+            print(2)
+    else:
+        return render_template('main')
 # @app.route('/mypage/update', methods=['POST'])
 #     # if session['user_id']:
 #     #     if request.
