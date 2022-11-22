@@ -32,9 +32,9 @@ a:hover {
 }
 
 .wrap {
-	width: 900px;
+	width: 100%;
+	height: 100vh;
 	background-color: #fff;
-	border: 1px solid #000;
 }
 .header {
 	display: flex;
@@ -59,6 +59,9 @@ a:hover {
 	display: inline-flex;
 	margin: 0 1em;
 }
+.header .side_menu {
+	display: flex;
+}
 .header .side_menu a {
 	display: inline-flex;
 	margin: 0 0 0 1em;
@@ -67,6 +70,10 @@ a:hover {
 .main {
 	text-align: center;
 	padding: 2em;
+}
+
+.main .photo {
+	margin: 0 auto;
 }
 
 .main .title {
@@ -81,6 +88,15 @@ a:hover {
 .main .title p {
 	font-size: 20px;
 	font-weight: bold;
+}
+
+.list {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.list ul {
+	margin-top: 50px;
 }
 
 .list ul li {
@@ -159,11 +175,15 @@ a:hover {
 	margin: 2em 0;
 }
 .share a {
-	width: 45px;
-	height: 45px;
 	display: inline-flex;
-	border-radius: 50%;
-	overflow: hidden;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
+	background: #000;
+	border-radius: 50px;
+	height: 50px;
+	padding: 0 2em;
+	color: #fff;
 }
 
 .btn a {
@@ -182,10 +202,17 @@ a:hover {
 	display: flex;
 	justify-content: space-between;
 	padding: 2em 0;
+	margin-bottom: 30px;
 }
 
 .hero {
 	width: 45%;
+}
+
+.main .sex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .upload {
@@ -202,4 +229,52 @@ a:hover {
 
 .hero a img {
 	width: 100%;
+}
+
+.toggleSwitch {
+	width: 80px;
+	margin: 30px;
+	height: 40px;
+	display: block;
+	position: relative;
+	border-radius: 30px;
+	background-color: #fff;
+	box-shadow: 0 0 16px 3px rgba(0 0 0 / 15%);
+	cursor: pointer;
+}
+
+.toggleSwitch .toggleButton {
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 50%;
+	left: 4px;
+	transform: translateY(-50%);
+	border-radius: 50%;
+	background: #f03d3d;
+}
+
+#toggle:checked ~ .toggleSwitch {
+	background: #f03d3d;
+}
+
+#toggle:checked ~ .toggleSwitch .toggleButton {
+	left: calc(100% - 36px);
+	background: #fff;
+}
+
+.toggleSwitch,
+.toggleButton {
+	transition: all 0.2s ease-in;
+}
+
+.loginInfo {
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s;
+}
+
+.loginInfo.active {
+	opacity: 1;
+	visibility: visible;
 }

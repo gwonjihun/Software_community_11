@@ -4,23 +4,29 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1tle">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<link rel="stylesheet" href="../static/css/jeongmin/style.css">
+	<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 	<div class="wrap">
 		<header class="header">
 			<div class="head">
-				<h1>닮는 것을 담다</h1>
+				<h1><a href="./index.html">닮는 것을 담다</a></h1>
 				<nav class="navi">
 					<a href="#">자유 게시판</a>
 					<a href="#">결과 게시판</a>
 				</nav>
 			</div>
 			<div class="side_menu">
-				<a href="#">로그인</a>
+				<div class="loginInfo">
+					<a href="#">userID</a>
+					<a href="#">25℃</a>
+					<a href="#">개인정보 수정</a>
+					<a href="#">쪽지함</a>
+				</div>
+				<a href="#" class="login">로그인</a>
 				<a href="#">회원가입</a>
 			</div>
 		</header>
@@ -28,8 +34,11 @@
 		<main class="main">
 			<article class="title">
 				<h2>이청아</h2>
-				<p>'청초에서 카리스마까지' 반전의</p>
 			</article>
+
+			<div class="photo">
+				<img src="./img/sample.jpg" alt="">
+			</div>
 
 			<div class="list">
 				<ul>
@@ -87,16 +96,15 @@
 			</div>
 
 			<div class="share">
-				<a href="#"><img src="../static/img/icon_cacaostory.png" alt="카카오스토리"></a>
-				<a href="#"><img src="../static/img/icon_line.png" alt="라인"></a>
-				<a href="#"><img src="../static/img/icon_plus.png" alt="구글플러스"></a>
+				<a href="./upload.html">게시판 공유하기</a>
 			</div>
 
 			<div class="btn">
-				<a href="#">다른 사진으로 재시도</a>
+				<a href="./upload.html">다른 사진으로 재시도</a>
 			</div>
 		</main>
 	</div>
+	<script src="./main.js"></script>
 </body>
 
 </html>
