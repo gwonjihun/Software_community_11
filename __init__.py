@@ -30,7 +30,7 @@ def check_register_nickname():
                 result = {'duplicate' : 'False'}
                 return make_response(jsonify(result,201))
     else:
-        return redirect('/',200)
+        return redirect('/main',200)
 
 @app.route('/register',methods=['GET','POST'])
 def register():
@@ -57,7 +57,7 @@ def register():
 def login():
 
     if 'user_id' in session:
-        return render_template(url_for('/'))
+        return redirect(url_for('main'))
     if request.method == 'POST':
         print(request.method)
         print(request.form['userid'])
@@ -73,69 +73,6 @@ def login():
             flash("아이디와 비밀번호를 확인해 주세요")
             return redirect(url_for('login'))
     return render_template('loginM.html',msg='testing now')
-
-
-@app.route('/',methods=['GET','POST'])
-def main_view():
-    # 
-    if request.method=='POST':
-        if 'user_id' in session:
-            return render_template('main.html',id = session['user_id'])
-        # 비회원의 경우
-        else:
-            return render_template('main.html',id= '')
-
-    elif request.method =='GET':
-        if 'user_id' in session:
-            return render_template('main.html',id=session['user_id'])
-        else:
-            return render_template('main.html')
-# @app.route('/mypage/update', methods=['POST'])
-#     # if session['user_id']:
-#     #     if request.
-#     # else:
-#     #     return redirect('/')
-
-# get -> 마이페이지 출력
-# post ->user정보 수정
-@app.route('/info',methods=['GET','POST'])
-def mypage():
-    if session['user_id']:
-        if request.method =='POST':
-            print()
-        elif request.method =='GET':
-            print()
-            return render_template('mypage.html')
-    else:
-        #  세션이 존재 x이면 닮은꼴 입력하는 초기 화면으로 진행한다.
-        return redirect('/')
-@app.route('/person',methods=['GET'])
-def person():
-    return render_template('pri.html')
-
-
-#  get all은 쪽지함 조회 클릭시 기본적으로 보여주는 곳
-@app.route('/note/all',methods=['GET','POST'])
-def notes():
-    if session['user_id']:
-        return redirect('/',406)
-@app.route('/logout',methods=['GET','POST'])
-def logout():
-    session.clear()
-    return redirect('/')
-# @app.route('/notice/share',methods=['GET','POST'])
-# def share_notice():
-#     pass
-
-# @app.route('/notice/free',method=['GET','POST'])
-# def free_notice():
-#     pass
-
-# @app.route('/mypage/',methods=['GET','POST','DELETE','UPDATE'])
-# def my_page():
-#     pass
-import os 
-
 @app.route('/temp',methods=['GET','POST'])
 def temp():
     # post 동작으로 결과 조회후 렌더링해준다
@@ -165,6 +102,67 @@ def temp():
         return render_template('temp.html')
     else:
         return render_template('temp.html')
+
+
+@app.route('/',methods=['GET','POST'])
+def main_view():
+    # 
+    input_time=datetime.now()
+    if request.method=='POST':
+        if 'user_id' in session:
+            return render_template('main.html',id = session['user_id'])
+        # 비회원의 경우
+        else:
+            return render_template('main.html',id= '')
+
+    else:
+        return render_template('main.html')
+# @app.route('/mypage/update', methods=['POST'])
+#     # if session['user_id']:
+#     #     if request.
+#     # else:
+#     #     return redirect('/')
+
+# get -> 마이페이지 출력
+# post ->user정보 수정
+@app.route('/info',methods=['GET','POST'])
+def mypage():
+    if session['user_id']:
+        if request.method =='POST':
+            print()
+        elif request.method =='GET':
+            print()
+            return render_template('mypage.html')
+    else:
+        #  세션이 존재 x이면 닮은꼴 입력하는 초기 화면으로 진행한다.
+        return redirect('/main')
+@app.route('/person',methods=['GET'])
+def person():
+    return render_template('pri.html')
+
+
+#  get all은 쪽지함 조회 클릭시 기본적으로 보여주는 곳
+@app.route('/note/all',methods=['GET','POST'])
+def notes():
+    if session['user_id']:
+        return redirect('/main',406)
+@app.route('/logout',methods=['GET','POST'])
+def logout():
+    session.clear()
+    return redirect('/')
+# @app.route('/notice/share',methods=['GET','POST'])
+# def share_notice():
+#     pass
+
+# @app.route('/notice/free',method=['GET','POST'])
+# def free_notice():
+#     pass
+
+# @app.route('/mypage/',methods=['GET','POST','DELETE','UPDATE'])
+# def my_page():
+#     pass
+import os 
+
 
 if __name__== '__main__':
     app.secret_key = 'super secret key'

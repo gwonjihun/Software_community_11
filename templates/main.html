@@ -25,7 +25,7 @@
 						<a href="#">{{ session['user_id'] }}</a>
 						<a href="#">25℃</a>
 						<a href="#">개인정보 수정</a>
-						<a href="{{ url_for('/') }}">쪽지함</a>
+						<a href="{{ url_for('notes') }}">쪽지함</a>
 						<a href="{{ url_for('logout') }}">로그아웃</a>
 					</div>
 				{% else %}
@@ -38,7 +38,7 @@
 
 		<main class="main">
 
-			<form form action="{{url_for('temp')}}"  method="POST" enctype="multipart/form-data" >
+			<form form action="{{url_for('main_view	')}}"  method="POST" enctype="multipart/form-data" >
 				<h2>성별을 선택해주세요.</h2>
 				<div class="sex">
 					<input type="hidden" id="gender_flag" name="gender_flag" value="0" >
