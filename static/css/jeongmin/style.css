@@ -184,6 +184,7 @@ a:hover {
 	height: 50px;
 	padding: 0 2em;
 	color: #fff;
+
 }
 
 .btn a {
@@ -196,6 +197,7 @@ a:hover {
 	height: 50px;
 	padding: 0 2em;
 	color: #fff;
+	
 }
 
 .container {
@@ -218,6 +220,8 @@ a:hover {
 .upload {
 	width: 45%;
 	border: 1px solid #000;
+    align-items: center;
+
 }
 .upload a {
 	display: flex;
@@ -226,7 +230,46 @@ a:hover {
 	width: 100%;
 	height: 100%;
 }
+.upload button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+.upload label{
+	
+  display: inline-block;
+  padding: .5em .75em;
+  color: #999;
+  font-size: inherit;
+  line-height: middle;
+  vertical-align: center;
+  text-align:center;
+  background-color: #fdfdfd;
+  cursor: pointer;
+  border: 1px solid #fdfdfd;
+  border-bottom-color: #fdfdfd;
+  border-radius: .25em;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 30%;
+}
+.upload input[type="file"]{
+	line-height: middle;
+	vertical-align: center;
+  
+	text-align: center;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip:rect(0,0,0,0);
+  border: 0;
 
+}
 .hero a img {
 	width: 100%;
 }
@@ -269,12 +312,10 @@ a:hover {
 }
 
 .loginInfo {
-	opacity: 0;
-	visibility: hidden;
+	opacity: 1;
 	transition: all 0.3s;
 }
 
 .loginInfo.active {
 	opacity: 1;
-	visibility: visible;
 }
