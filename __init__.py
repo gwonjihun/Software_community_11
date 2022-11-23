@@ -142,8 +142,11 @@ def temp():
     input_time = datetime.now()
     # 위에는 현재시간을 알려주는 코드 
     if request.method =='POST':
+        print(request.form)
         f = request.files['file']
-        gender = int(request.form['gender_flag'])
+        print(f)
+        print(request.form["gender_flag"])
+        gender = int(request.form["gender_flag"])
         print(gender)
         print(f.filename.split('.')[-1])
         if f.filename.split('.')[-1] == 'jpg':

@@ -38,27 +38,28 @@
 
 		<main class="main">
 
-			<form form action="{{url_for('temp')}}" method="POST" enctype="multipart/form-data">
+			<form form action="{{url_for('temp')}}"  method="POST" enctype="multipart/form-data" >
 				<h2>성별을 선택해주세요.</h2>
 				<div class="sex">
-					<input type="checkbox" id="toggle" name = "gender_flag" value="0" hidden>
+					<input type="hidden" id="gender_flag" name="gender_flag" value="0" >
+					<input type="checkbox" id="toggle"hidden>
 					<span>남자</span>
-					<label for="toggle" class="toggleSwitch" onclick="togglechange()">
+					<label for="toggle" class="toggleSwitch" onclick="togglechange()" >
 						<span class="toggleButton"></span>
 					</label>
 					<span>여자</span>
 				</div>
 				<section class="container">
-				<div class="hero">
-					<a href="#"><img src="../static/img/그림1.jpg"></a>
-				</div>
+					<div class="hero">
+						<a href="#"><img src="../static/img/그림1.jpg"></a>
+					</div>
 
-				<div class="upload">
-					<input type="file" id="ex_file" name="file" hidden>
-					<label for="ex_file">얼굴 사진을 올려놓거나<br>눌러서 업로드하세요.</label> 
-
-				</div>
-			</section>
+					<div class="upload">
+						<input type="file" id="ex_file" name="file" hidden>
+						<label for="ex_file">얼굴 사진을 올려놓거나<br>눌러서 업로드하세요.</label> 
+						<input type="submit" id="submit" hidden/>
+					</div>
+				</section>
 
 			
 			</form>
@@ -66,12 +67,18 @@
 
 	</div>
 	<script>
+		document.getElementById('ex_file').onchange = function() {
+			document.getElementById('submit').click();
+			console.log('실행');
+		};
 	function togglechange(){
-		if (document.getElementById("toggle").value == "0"){ 
-		document.getElementById("toggle").value="1";
+		if (document.getElementById("gender_flag").value =="0"){ 
+		document.getElementById("gender_flag").value="1";
+		
 		}
-		else{		document.getElementById("toggle").value="0";}
-	}
+		else{		document.getElementById("gender_flag").value="0";}
+		console.log(1);
+	};
 		</script>
 </body>
 
