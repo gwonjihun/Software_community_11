@@ -48,6 +48,7 @@ def register():
                 password =  generate_password_hash(request.form['password'])
                 if Customer_DAO.register_member(request.form['userid'],password,request.form['user_nicname'],request.form['user_fullname'],request.form['birthday'],request.form['paper_flag'],request.form['gender_flag'],request.form['create_at']) :
                     return '성공'
+                    # prinst
                     # return redirect('/',200)
                 else:
                     return '실패'
