@@ -16,7 +16,7 @@ class CelebrityPredictionModel:
             model_male_path = os.path.join(base_dir, "./model/model_men.h5")
             mode_female_path = os.path.join(base_dir, "./model/model_women.h5")
             face_detector_path = os.path.join(base_dir, "./model/haarcascade_frontalface_default.xml")
-            
+        print(os.getcwd())
         self.__model_male = load_model(model_male_path)
         self.__model_female = load_model(mode_female_path)
         self.__face_detector = cv2.CascadeClassifier(face_detector_path)
