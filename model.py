@@ -156,3 +156,24 @@ class Note_Dao:
             return []
         db.close()    
         return result
+
+
+class simlityDAO:
+    def __init__(self): 
+        pass
+    def find_people(picname):
+        db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
+        curs = db.cursor()
+        result=[]
+        sql = f'''select pic_add from image_info where pic_name = '{picname}';'''
+        print(sql)
+        try:
+            curs.execute(sql)
+            result = curs.fetchone()
+
+        except:
+            db.close()
+            return []
+        db.commit()
+        db.close()
+        return result

@@ -63,9 +63,13 @@
         text-align:center;
     }
     #cloes{
-        border:0.2px solid gray;
+      border-radius:30px;
+        border:1px solid #008CBA;
         background-color: white;
-        height:40px;
+        color: #008CBA;
+        padding: 10px 15px;
+        font-size: 16px;
+        letter-spacing: 1px;
     }
     #cloes:active {
       background-color: #e5e5e5;
@@ -247,7 +251,7 @@
         <div class = "item2">확인하지 않은 쪽지가 00개 있습니다.</div>
       </div>
         <footer>
-            <button id="cloes">창닫기</button>
+            <a href="{{url_for('main_view')}}" id="cloes">창닫기</a>
         </footer>
     </div>
 

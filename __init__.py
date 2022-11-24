@@ -1,6 +1,6 @@
 from flask import Flask,render_template, request, redirect, url_for, session,make_response,jsonify,flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from model import Customer_DAO
+from model import *
 from predict import CelebrityPredictionModel
 from datetime import datetime,timedelta
 app = Flask(__name__)
@@ -73,21 +73,20 @@ def login():
             flash("아이디와 비밀번호를 확인해 주세요")
             return redirect(url_for('login'))
     return render_template('loginM.html',msg='testing now')
+
+
 @app.route('/temp',methods=['GET','POST'])
 def temp():
     # post 동작으로 결과 조회후 렌더링해준다
     input_time = datetime.now()
     # 위에는 현재시간을 알려주는 코드 
     if request.method =='POST':
-        print(request.form)
         f = request.files['file']
-        print(f)
-        print(request.form["gender_flag"])
         gender = int(request.form["gender_flag"])
         print(gender)
-        print(f.filename.split('.')[-1])
-        if f.filename.split('.')[-1] == 'jpg':
-            save_to = f'./static/img/' + input_time.strftime('%Y%m%d%H%M%S') +'.jpg'
+        print(f.filename.split('.'))
+        if f.filename.split('.')[-1] in ['jpg','png','jpeg']:
+            save_to = f'./static/img/' + input_time.strftime('%Y%m%d%H%M%S') +'.'+f.filename.split('.')[-1]
             # save_to = f'static/img/profiles/{user_id}'
             f.save(save_to)
             result = predictor.predict_img(gender,save_to)
@@ -95,6 +94,7 @@ def temp():
                 print("flash")
                 flash('Not find humon')
                 return render_template('temp.html')
+            print(result)
             if os.path.isfile(save_to):
                 os.remove(save_to)
                 print('file delete finish')
@@ -109,12 +109,39 @@ def main_view():
     # 
     input_time=datetime.now()
     if request.method=='POST':
-        if 'user_id' in session:
-            return render_template('main.html',id = session['user_id'])
-        # 비회원의 경우
-        else:
-            return render_template('main.html',id= '')
+        f = request.files['file']
+        gender = int(request.form["gender_flag"])
+        print(gender)
+        print(f.filename.split('.')[-1])
+        result = predictor
+        if f.filename.split('.')[-1] in ['jpg','png','jpeg']:
+            save_to = f'./static/img/' + input_time.strftime('%Y%m%d%H%M%S') +'.'+f.filename.split('.')[-1]
+            # save_to = f'static/img/profiles/{user_id}'
+            f.save(save_to)
+            result = predictor.predict_img(gender,save_to)
+            # 결과가 없는 경우 바로 alert창 나오는 영역
+            if os.path.isfile(save_to):
+                os.remove(save_to)
+                print('file delete finish')
+            # 사람이 아닐때
+            if result == []:
+                print("flash")
+                flash('Not find humon')
+                return render_template('main.html')
+            # db에서 img 주소 추출
+            img_src = simlityDAO.find_people(result[0][1])
+            print(img_src)
+            
+            # 회원인경우 결과를 기반으로 DB에 정보저장해준다.
+            if 'user_id' in session:
+                print('회원이면 이제 여기서 dao로 insert문 생성')
+            # 비회원의 경우
 
+            return render_template('mainresult.html',imgsrc=img_src,results=result)
+        # 파일 형식이 안맞을 경우
+        else: 
+            flash('지원가능한 파일형식은 jpg,png,jpeg입니다. 확인 후 재시도바랍니다.')
+            return render_template('main.html')
     else:
         return render_template('main.html')
 # @app.route('/mypage/update', methods=['POST'])
@@ -144,7 +171,9 @@ def person():
 #  get all은 쪽지함 조회 클릭시 기본적으로 보여주는 곳
 @app.route('/note/all',methods=['GET','POST'])
 def notes():
-    if session['user_id']:
+    if 'user_id'in session:
+        return render_template('receivenote.html')
+    else:     
         return redirect('/main',406)
 @app.route('/logout',methods=['GET','POST'])
 def logout():
