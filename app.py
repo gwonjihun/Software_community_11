@@ -37,7 +37,7 @@ def register():
     if 'userid' not in session:
         print(request.form)
         if request.method == 'POST':
-            id = request.form['user_id']
+            id = request.form['userid']
             if id.isalnum() == False:
                 result = {
                     'space' : True,
