@@ -75,34 +75,6 @@ def login():
     return render_template('loginM.html',msg='testing now')
 
 
-@app.route('/temp',methods=['GET','POST'])
-def temp():
-    # post 동작으로 결과 조회후 렌더링해준다
-    input_time = datetime.now()
-    # 위에는 현재시간을 알려주는 코드 
-    if request.method =='POST':
-        f = request.files['file']
-        gender = int(request.form["gender_flag"])
-        print(gender)
-        print(f.filename.split('.'))
-        if f.filename.split('.')[-1] in ['jpg','png','jpeg']:
-            save_to = f'./static/img/' + input_time.strftime('%Y%m%d%H%M%S') +'.'+f.filename.split('.')[-1]
-            # save_to = f'static/img/profiles/{user_id}'
-            f.save(save_to)
-            result = predictor.predict_img(gender,save_to)
-            if result == []:
-                print("flash")
-                flash('Not find humon')
-                return render_template('temp.html')
-            print(result)
-            if os.path.isfile(save_to):
-                os.remove(save_to)
-                print('file delete finish')
-            return render_template('tempresult.html',rank= result)
-        return render_template('temp.html')
-    else:
-        return render_template('temp.html')
-
 
 @app.route('/',methods=['GET','POST'])
 def main_view():
