@@ -6,14 +6,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="../static/css/jeongmin/style.css">
 </head>
-
+<style>
+</style>
 <body>
 	<div class="wrap">
 		<header class="header">
 			<div class="head">
-				<h1><a href="./index.html">닮는 것을 담다</a></h1>
+				<h1><a href="{{ url_for('main_view')}}">닮는 것을 담다</a></h1>
 				<nav class="navi">
 					<a href="#">자유 게시판</a>
 					<a href="#">결과 게시판</a>
@@ -33,65 +34,27 @@
 
 		<main class="main">
 			<article class="title">
-				<h2>이청아</h2>
+				<h2>{{ results[0][1] }}</h2>
 			</article>
 
 			<div class="photo">
-				<img src="./img/sample.jpg" alt="">
+				<img src="{{ imgsrc[0] }}" width="500px" height="400px" alt="">
 			</div>
 
 			<div class="list">
 				<ul>
+					{% for i in results%}
 					<li>
 						<dl>
-							<dt>이청아</dt>
+							<dt>{{i[1]}}</dt>
 							<dd>
 								<article class="progressbar">
-									<span class="gauge">64%</span>
+									<span class="gauge" id="{{ i[1] }}" value= "{{ i[0]|round }}">{{ i[0]|round(1) }}</span>
 								</article>
 							</dd>
 						</dl>
 					</li>
-					<li>
-						<dl>
-							<dt>모모</dt>
-							<dd>
-								<article class="progressbar">
-									<span class="gauge">13%</span>
-								</article>
-							</dd>
-						</dl>
-					</li>
-					<li>
-						<dl>
-							<dt>우기</dt>
-							<dd>
-								<article class="progressbar">
-									<span class="gauge">11%</span>
-								</article>
-							</dd>
-						</dl>
-					</li>
-					<li>
-						<dl>
-							<dt>리사</dt>
-							<dd>
-								<article class="progressbar">
-									<span class="gauge">9%</span>
-								</article>
-							</dd>
-						</dl>
-					</li>
-					<li>
-						<dl>
-							<dt>이지아</dt>
-							<dd>
-								<article class="progressbar">
-									<span class="gauge">1%</span>
-								</article>
-							</dd>
-						</dl>
-					</li>
+					{% endfor %}
 				</ul>
 			</div>
 
