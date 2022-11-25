@@ -107,7 +107,12 @@ def main_view():
             
             # 회원인경우 결과를 기반으로 DB에 정보저장해준다.
             if 'user_id' in session:
-                print('회원이면 이제 여기서 dao로 insert문 생성')
+                if simlityDAO.check_result(userid=session['user_id']):
+                    # simlityDAO.update_result
+                    print(1)
+                else:
+                    print(2)
+                    # simlityDAO.insert_result
             # 비회원의 경우
 
             return render_template('mainresult.html',imgsrc=img_src,results=result)

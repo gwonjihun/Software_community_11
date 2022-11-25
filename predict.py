@@ -9,16 +9,20 @@ import os
 class CelebrityPredictionModel:
     def __init__(self, base_dir=None) -> None:
         if base_dir:
-            model_male_path = os.path.join(base_dir, "model_men.h5")
-            mode_female_path = os.path.join(base_dir, "model_women.h5")
-            face_detector_path = os.path.join(base_dir, "haarcascade_frontalface_default.xml")
+            model_male_path = os.path.join(base_dir, "./model/model_men.h5")
+            model_female_path = os.path.join(base_dir, "./model/model_women.h5")
+            face_detector_path = os.path.join(base_dir, "./model/haarcascade_frontalface_default.xml")
         else:
             model_male_path = os.path.join(base_dir, "./model/model_men.h5")
-            mode_female_path = os.path.join(base_dir, "./model/model_women.h5")
+            model_female_path = os.path.join(base_dir, "./model/model_women.h5")
             face_detector_path = os.path.join(base_dir, "./model/haarcascade_frontalface_default.xml")
         print(os.getcwd())
+        print(model_female_path)
+        print(model_male_path)
+        print(face_detector_path)
+        print()
         self.__model_male = load_model(model_male_path)
-        self.__model_female = load_model(mode_female_path)
+        self.__model_female = load_model(model_female_path)
         self.__face_detector = cv2.CascadeClassifier(face_detector_path)
         self.__male_celebrity = ['마동석', '문빈', '비', '손석구', '송강', '송강호', '유재석', '조우진', '지코', '차은우', '박보검', '김수현', '강동원', '정국', '김종국']
         self.__female_celebrity = ['나연', '박나래', '박은빈', '박진주', '에일리', '이국주', '제니', '주현영', '츄', '미주', '솔라', '민지', '장원영', '카즈하', '아이유']

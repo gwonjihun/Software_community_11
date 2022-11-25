@@ -10,7 +10,7 @@ class Customer_DAO:
     def register_member(user_id,password,user_nickname,user_fullname,birthday,paper_flag,gender_flag,create_at):
         # 클라우드로 배포시 사용 예정
         # db = pymysql.connect(host=os.getenv('db_host'),user=os.getenv('db_user'),password=os.getenv('db_password'),db='test_db')
-        
+        temp_db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         db = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')
         curs = db.cursor()
         # 활동온도는 초기 36.5도로 고정
@@ -27,6 +27,7 @@ class Customer_DAO:
 
     def check_login(user_id,password):
         print(password)
+        temp_db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         db = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')
         curs = db.cursor()
         # 활 동온도는 초기 36.5도로 고정
@@ -43,6 +44,7 @@ class Customer_DAO:
 
     def duplicate_member(user_id):
         db = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')
+        temp_db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         curs = db.cursor()
         
         sql = f'''select * from customers where user_id ="{user_id}"'''
@@ -61,6 +63,7 @@ class Customer_DAO:
             return False
 
     def duplicate_nickname(user_nickname):
+        temp_db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         db = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')
         curs = db.cursor()
         
@@ -84,6 +87,7 @@ class Note_Dao:
     def __init__(self): 
         pass
     def send_note(sender_id,receiver_id, title, content,create_at):
+        temp_db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         db = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')
         curs = db.cursor()
         
@@ -99,6 +103,7 @@ class Note_Dao:
         return True
     # 보낸 쪽지함 조회
     def view_send(sender_id):
+        temp_db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         db = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')
         curs = db.cursor()
         
@@ -114,6 +119,7 @@ class Note_Dao:
 
     # 수신 쪽지 내용 조회
     def detail_view(sender_id,receiver_id,create_at):
+        temp_db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         db = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')
         curs = db.cursor()
         
@@ -144,6 +150,7 @@ class Note_Dao:
     # 보낸 쪽지 삭제 보낸 쪽지 리스트는 지울 수 없음
     # but, 수신자는 해당 쪽지를 지울 수 있음
     def delete_note(sender_id, receiver_id, title, content):
+        temp_db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         db = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')
         curs = db.cursor()
         
@@ -161,7 +168,31 @@ class Note_Dao:
 class simlityDAO:
     def __init__(self): 
         pass
+    def check_result(userid):
+        temp_db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
+        db = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')
+        curs = db.cursor()
+        sql = f'''select user_id from similarity_table where user_id = {userid}'''
+        try:
+            curs.execute(sql)
+            result = curs.rowcount()
+        except:
+            db.close()
+            return False
+        if result:
+            return False
+        db.commit()
+        db.close()
+        return True
+
+    def insert_result(userid,result):
+        temp_db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
+        db = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')
+        curs = db.cursor()
+        sql = f'''select user_id from similarity_table where user_id = {userid}'''
+        
     def find_people(picname):
+        temp_db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         db = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')
         curs = db.cursor()
         result=[]
