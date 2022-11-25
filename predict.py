@@ -9,13 +9,14 @@ import os
 class CelebrityPredictionModel:
     def __init__(self, base_dir=None) -> None:
         if base_dir:
-            model_male_path = os.path.join(base_dir, "./model/model_men.h5")
-            model_female_path = os.path.join(base_dir, "./model/model_women.h5")
-            face_detector_path = os.path.join(base_dir, "./model/haarcascade_frontalface_default.xml")
+            print("!@#!@#$!@!@$!@$!@$!@$!@$!@$")
+            model_male_path = os.path.join(base_dir, "model_men.h5")
+            model_female_path = os.path.join(base_dir, "model_women.h5")
+            face_detector_path = os.path.join(base_dir, "haarcascade_frontalface_default.xml")
         else:
-            model_male_path = os.path.join(base_dir, "./model/model_men.h5")
-            model_female_path = os.path.join(base_dir, "./model/model_women.h5")
-            face_detector_path = os.path.join(base_dir, "./model/haarcascade_frontalface_default.xml")
+            model_male_path = os.path.join(base_dir, ".\\model\\model_men.h5")
+            model_female_path = os.path.join(base_dir, ".\\model\\model_women.h5")
+            face_detector_path = os.path.join(base_dir, ".\\model\\haarcascade_frontalface_default.xml")
         print(os.getcwd())
         print(model_female_path)
         print(model_male_path)

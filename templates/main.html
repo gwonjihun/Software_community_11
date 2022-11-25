@@ -8,25 +8,25 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../static/css/jeongmin/style.css">
 
-	<title>내 쪽지함</title>
+	<title>닮은 것을 담다</title>
 </head>
 
 <body>
 	<div class="wrap">
 		<header class="header">
 			<div class="head">
-				<h1><a href="./index.html">닮는 것을 담다</a></h1>
+				<h1><a href="{{url_for('main_view')}}">닮는 것을 담다</a></h1>
 				<nav class="navi">
-					<a href="#">자유 게시판</a>
-					<a href="#">결과 게시판</a>
+					<a href="{{url_for('list_free')}}">자유 게시판</a>
+					<a href="{{url_for('list_share')}}">결과 게시판</a>
 				</nav>
 			</div>
 			<div class="side_menu">
 				{% if session["user_id"] %}
 					<div class="loginInfo">
 						<a href="#">{{ session['user_id'] }}</a>
-						<a href="#">25℃</a>
-						<a href="#">개인정보 수정</a>
+						25
+						<a href="{{url_for('update_person')}}">개인정보 수정</a>
 						<a href="{{ url_for('notes') }}">쪽지함</a>
 						<a href="{{ url_for('logout') }}">로그아웃</a>
 					</div>

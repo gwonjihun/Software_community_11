@@ -6,7 +6,7 @@ from datetime import datetime,timedelta
 app = Flask(__name__)
 
 app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=10) 
-predictor = CelebrityPredictionModel("./model")
+predictor = CelebrityPredictionModel(".\\model")
 
 # 회원가입 ID 체크
 @app.route('/register/check/id', methods=['POST'])
@@ -107,11 +107,14 @@ def main_view():
             
             # 회원인경우 결과를 기반으로 DB에 정보저장해준다.
             if 'user_id' in session:
+                print(simlityDAO.check_result(userid=session['user_id']))
+                print(session['user_id'])
                 if simlityDAO.check_result(userid=session['user_id']):
                     # simlityDAO.update_result
-                    print(1)
+                    simlityDAO.update_result(session['user_id'],result=result)
                 else:
-                    print(2)
+                    # 회원의 기존 사진이 없을 경우 insert 진행
+                    simlityDAO.insert_result(session['user_id'],result)
                     # simlityDAO.insert_result
             # 비회원의 경우
 
@@ -130,22 +133,31 @@ def main_view():
 
 # get -> 마이페이지 출력
 # post ->user정보 수정
-@app.route('/info',methods=['GET','POST'])
-def mypage():
-    if session['user_id']:
-        if request.method =='POST':
-            print()
-        elif request.method =='GET':
-            print()
-            return render_template('mypage.html')
-    else:
-        #  세션이 존재 x이면 닮은꼴 입력하는 초기 화면으로 진행한다.
-        return redirect('/main')
+# @app.route('/info',methods=['GET','POST'])
+# def mypage():
+#     if session['user_id']:
+#         if request.method =='POST':
+#             print()
+#         elif request.method =='GET':
+#             print()
+#             return render_template('mypage.html')
+#     else:
+#         #  세션이 존재 x이면 닮은꼴 입력하는 초기 화면으로 진행한다.
+#         return redirect('/main')
 @app.route('/person',methods=['GET'])
 def person():
     return render_template('pri.html')
+@app.route('/list/free',methods=['GET','POST'])
+def list_free():
+    return render_template('listF.html')
 
+@app.route('/list/share',methods=['GET','POST'])
+def list_share():
+    return render_template('listS.html')
 
+@app.route('/update_info',methods=['GET','POST'])
+def update_person():
+    return render_template('Myinform.html')
 #  get all은 쪽지함 조회 클릭시 기본적으로 보여주는 곳
 @app.route('/note/all',methods=['GET','POST'])
 def notes():
