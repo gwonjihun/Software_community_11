@@ -22,18 +22,34 @@
 
 </head>
 <body>
-    <div class="header_wrap">
-        <header class="header">
+	<div class="wrap">
+		<header class="header">
 			<div class="head">
-				<a href="main.html"><h1>닮는 것을 담다</h1></a>
+				<h1><a href="{{url_for('main_view')}}">닮는 것을 담다</a></h1>
 				<nav class="navi">
-					<a href="listF.html">자유 게시판</a>
-					<a href="listS.html">결과 게시판</a>
+					<a href="{{url_for('list_free')}}">자유 게시판</a>
+					<a href="{{url_for('list_share')}}">결과 게시판</a>
 				</nav>
 			</div>
 			<div class="side_menu">
-				<a href="LoginM.html">로그인</a>
-				<a href="Register.html">회원가입</a>
+				{% if session["user_id"] %}
+					<div class="loginInfo">
+						<a href="#">{{ session['user_id'] }}</a>
+						{{ session['temp']}} °C	 
+						<a href="{{url_for('update_person')}}">개인정보 수정</a>
+						<a id = 'note' onclick = "show()">쪽지함</a>
+						<a href="{{ url_for('logout') }}">로그아웃</a>
+					</div>
+					<script>
+						function show(){
+						window.open("{{url_for('note_receive')}}","_blank", "resizable=yes");
+
+					}	
+					</script>
+				{% else %}
+					<a href="{{ url_for('login') }}"  class="login">로그인</a>
+					<a href="{{ url_for('register') }}">회원가입</a>
+				{% endif %}
 			</div>
 		</header>
     </div>

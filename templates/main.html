@@ -25,11 +25,17 @@
 				{% if session["user_id"] %}
 					<div class="loginInfo">
 						<a href="#">{{ session['user_id'] }}</a>
-						25
+						{{ session['temp']}} °C	 
 						<a href="{{url_for('update_person')}}">개인정보 수정</a>
-						<a href="{{ url_for('notes') }}">쪽지함</a>
+						<a id = 'note' onclick = "show()">쪽지함</a>
 						<a href="{{ url_for('logout') }}">로그아웃</a>
 					</div>
+					<script>
+						function show(){
+						window.open("{{url_for('note_receive')}}","_blank", "resizable=yes");
+
+					}	
+					</script>
 				{% else %}
 					<a href="{{ url_for('login') }}"  class="login">로그인</a>
 					<a href="{{ url_for('register') }}">회원가입</a>

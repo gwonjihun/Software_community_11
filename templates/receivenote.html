@@ -4,31 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/fontello/css/fontello.css">
+  <link rel="stylesheet" href="../static/css/Seunghyun/fontello.css">
   <title>내 쪽지함</title>
-    <style>
-
+  <style>
     .container{
-      width:1500px;
+      width:100vw;
       margin:0 auto;
     }
     header{
-      margin-top: 290px;
       padding-left: 30px;
       font-size: 17px;
       border-bottom:2px solid gray;
       color : black;
       line-height:20px;
     }
-
-  /* ===== 받은쪽지, 보낸쪽지, 쪽지쓰기 효과적용===== */
+    
+    /* ===== 받은쪽지, 보낸쪽지, 쪽지쓰기 효과적용===== */
     .subtitle{
         margin-top:20px;
         border-bottom:1px solid gray;
-        padding-left:55px;
+        padding-left:40px;
         height : 60px;
     }
-    .subtitle > button {
+    .subtitle >form > button {
+        position: relative;
+        bottom: 44px;
+        left : 85px;
         border-radius:30px;
         border:1px solid #008CBA;
         background-color: white;
@@ -37,11 +38,14 @@
         font-size: 16px;
         letter-spacing: 1px;
     }
-    .subtitle > button.selected {
+    .subtitle > form > button.selected {
+        position: relative;
+        bottom: 0px;
+        left : -20px;
         background-color: #008CBA;
         color: white;
     }
-    .subtitle > button:active {
+    .subtitle > form >button:active {
         box-shadow: 1px 1px 0 rgb(0,0,0,0.5);
         position: relative;
         top:2px;
@@ -49,61 +53,64 @@
     .subtitle:visited{
         color:#008CBA
     }
-    .subtitle > button:hover {
+    .subtitle > form> button:hover {
         background-color: #008CBA;
     }
     .button:hover{
         color:white;
     }
-
-/* ===== 창닫기 버튼 효과적용==== */
+    
+    /* ===== 창닫기 버튼 효과적용==== */
     footer{
         padding:30px;
         padding-left:30px;
         text-align:center;
     }
     #cloes{
-      border-radius:30px;
-        border:1px solid #008CBA;
+        border:0.2px solid gray;
         background-color: white;
-        color: #008CBA;
-        padding: 10px 15px;
-        font-size: 16px;
-        letter-spacing: 1px;
+        height:40px;
     }
     #cloes:active {
       background-color: #e5e5e5;
     }
-
-/* 쪽지내용 효과 */
-    .mail-list{display: flex; flex-direction: column;}
-    .mail-row{height: 60px;display:flex; flex-direction: row;justify-content: space-around; align-items: center;border-bottom: 1px solid gray;}
-    .mail-row .content{display:flex; width: 600px; text-align: left;}
+    
+    /* 쪽지내용 효과 */
+    
+    .mail-row{ 
+       height: 60px; display:flex; 
+         align-items: center; border-bottom: 1px solid gray;}
     .info{
       padding-left:12px;
     }
     .profile{
-      margin-right: 200px;
+      padding-left: 30px;
+    
+      width:300px;
+    }
+    .content_1{
+      width:700px;
     }
     #cancell{
       padding-left: -1000px;
     }
-
-
-/* 쪽지함 아래 빨간줄(확인하기 않는쪽지가 0통있습니다) */
+    
+    
+    /* 쪽지함 아래 빨간줄(확인하기 않는쪽지가 0통있습니다) */
     .main_item{
       display:flex;
       justify-content: center;
       height : 35px;
       margin-top:25px;
+      width : 100vw;
     }
     .item1{
       background-color:#CD426B;
-      width:6px;
+      width:0.7vw;
     }
     .item2{
       background-color:#FF88A7;
-      width :1493px;
+      width :99.3vw;
       color : white;
       line-height:33px;
       padding-left: 17px
@@ -118,16 +125,16 @@
     .send:active{
       background-color:white;
     }
-
-/* 보내기, 삭제에 마우스를 가져가면 커서가 바뀌는 효과 */
+    
+    /* 보내기, 삭제에 마우스를 가져가면 커서가 바뀌는 효과 */
     #send,input[type=submit]{
     cursor:pointer;
     }
     #cancell,input[type=submit]{
     cursor:pointer;
     }
-
-/* 쪽지보내기 누르면 보내기 연동싴는 효과 */
+    
+    /* 쪽지보내기 누르면 보내기 연동싴는 효과 */
     .white_content {
         position: fixed;
         top: 0;
@@ -146,18 +153,18 @@
         pointer-events: auto;
     }
     .white_content > div {
-    	position: absolute;
-    	top: 25%;
-    	left: 25%;
-    	width: 400px;
-    	height: 197px;
-    	padding: 16px;
-    	border: 1px solid white;
-    	background-color: white;
+       position: absolute;
+       top: 25%;
+       left: 25%;
+       width: 400px;
+       height: 197px;
+       padding: 16px;
+       border: 1px solid white;
+       background-color: white;
     }
-
-/* 쪽지쓰기 창의 효과 */
-
+    
+    /* 쪽지쓰기 창의 효과 */
+    
     .title{
       color:gray;
       font-size:22px;
@@ -172,7 +179,7 @@
     }
     .m_box{
     text-align: center;
-  }
+    }
     #message{
       border:1px solid gray;
       width : 380px;
@@ -199,9 +206,8 @@
     .close,input[type=submit]{
     cursor:pointer;
     }
-
+    
     </style>
-
 </head>
 <body>
     <div class="container">
@@ -210,48 +216,38 @@
         </header>
         <nav>
             <ul class="subtitle">
-                <button class="button selected">받은쪽지</button>
-                <button class="button">보낸쪽지</button>
+                <form action="{{url_for('note_receive')}}" >
+                  <button class="button selected" >받은쪽지</button>
+                </form>
+                <form action = "{{url_for('note_send')}}" method="GET">
+                  <button class="button" >보낸쪽지</button>
+                </form>
             </ul>
         </nav>
         <main>
           <div class="mail-list">
-            <div class="mail-row">
-              <div class="profile">닉네임</div>
-                <div class="content_1">
-                  <div class="content">
-                      <div class="info">날짜</div>
+
+            {% for j in result %}
+              <div class="mail-row">
+                <div class="profile">{{j[0]}}</div>
+                  <div class="content_1">
+                    <div class="content">
+                        <div class="info">{{j[2]}}</div>
+                    </div>
+                    <div class="c-chat">{{j[1]}}</div>
                   </div>
-                  <div class="c-chat">쪽지내용입니다</div>
+                    <div class="s_c">
+                      <a href="#open"><i id="send" class="icon-forward"></i></a>&emsp;&emsp;&emsp;
+                      <bottom id="cancell" class="icon-trash-empty"></bottom>
+                    </div>
                 </div>
-                  <div class="s_c">
-                    <a href="#open"><i id="send" class="icon-forward"></i></a>&emsp;&emsp;&emsp;
-                    <bottom id="cancell" class="icon-trash-empty"></bottom>
-                  </div>
               </div>
-            </div>
-            <div class="mail-row">
-              <div class="profile">닉네임</div>
-                <div class="content_1">
-                  <div class="content">
-                      <div class="info">날짜</div>
-                  </div>
-                  <div class="c-chat">쪽지내용입니다</div>
-                </div>
-                  <div class="s_c">
-                    <a href="#open"><i id="send" class="icon-forward"></i></a>&emsp;&emsp;&emsp;
-                    <bottom id="cancell" class="icon-trash-empty"></bottom>
-                  </div>
-              </div>
-            </div>
+            {% endfor %}
           </div>
         </main>
-      <div class="main_item">
-        <div class = "item1" >  </div>
-        <div class = "item2">확인하지 않은 쪽지가 00개 있습니다.</div>
-      </div>
+
         <footer>
-            <a href="{{url_for('main_view')}}" id="cloes">창닫기</a>
+            <button  id="cloes" onclick = "window.close()">창닫기</button>
         </footer>
     </div>
 
@@ -263,28 +259,17 @@
       <div> 쪽지보내기 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; </div> <div><a href="#close">X</a></div>
     </div>
       <form class="m_box">
-        <textarea id="message" wrap="physical" cols="30" rows="5"placeholder="내용을 입력해주세요(최대50글자)"></textarea>
+        <input type="hidden" name=receiver value="">
+        <textarea id="message" name=content wrap="physical" cols="30" rows="5"placeholder="내용을 입력해주세요(최대50글자)"></textarea>
         <br>
         <div class="s_box">
-          <input id="send2" type = "submit" value ="전송" style="color:white;">
+          <input id="send2" type="submit"  style="color:white;">
         </div>
       </form>
     </div>
   </div>
 </div>
 
-<!-- 받은쪽지 보낸쪽지 클릭시 색이 변하도록 -->
-    <script>
-    let buttons = document.querySelectorAll('.subtitle button');
-    buttons.forEach(
-        function(el){
-            el.addEventListener('click', function(){
-                buttons.forEach((el)=>{ el.classList.remove('selected'); });
-                this.classList.add('selected');
-            });
-        }
-    );
-    </script>
 
 
 </body>

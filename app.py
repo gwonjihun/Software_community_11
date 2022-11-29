@@ -34,26 +34,28 @@ def check_register_nickname():
 
 @app.route('/register',methods=['GET','POST'])
 def register():
+    input_time=datetime.now()
+    input_time = input_time.strftime('%Y-%m-%d %H:%M:%S')
     if 'userid' not in session:
         print(request.form)
         if request.method == 'POST':
             id = request.form['userid']
             if id.isalnum() == False:
-                result = {
-                    'space' : True,
-                    'msg ' : '공백 문자 존재'
-                }
-                return make_response(jsonify(result),401)
+                flash('ID에 공백과 특수문자를 제외하고 입력하세요')
+                return render_template('register.html')
             if Customer_DAO.duplicate_member(request.form['userid']):
                 password =  generate_password_hash(request.form['password'])
-                if Customer_DAO.register_member(request.form['userid'],password,request.form['user_nicname'],request.form['user_fullname'],request.form['birthday'],request.form['paper_flag'],request.form['gender_flag'],request.form['create_at']) :
-                    return '성공'
+                if Customer_DAO.register_member(request.form['userid'],password,request.form['user_nicname'],request.form['user_fullname'],request.form['birthday'],'1',request.form['gender_flag'],input_time) :
+                    return redirect('/')
                     # prinst
                     # return redirect('/',200)
                 else:
-                    return '실패'
+                    print(1)
+                    flash('동일한 아이디, 닉네임이 존재합니다.')
+                    return render_template('register.html')
         return render_template('register.html',msg='register loading succ')
-
+    else:
+        return redirect(url_for('main_view'))
 @app.route('/login',methods=['GET','POST'])
 def login():
 
@@ -67,14 +69,18 @@ def login():
         if Customer_DAO.check_login(request.form['userid'],password):
             print(request.form)
             session['user_id'] = request.form['userid']
-            res = make_response(redirect('/'))
-            res.set_cookie('userid',request.form['userid'])
-            return redirect('/')
+            session['temp'] = Customer_DAO.get_temp(request.form['userid'])[0]
+
+            return redirect(url_for('main_view'))
         else:
             flash("아이디와 비밀번호를 확인해 주세요")
             return redirect(url_for('login'))
     return render_template('loginM.html',msg='testing now')
 
+@app.route('/myresult',methods=['GET','POST'])
+def get_result():
+    if 'user_id' in session:
+        return render_template('mainresult.html')
 
 
 @app.route('/',methods=['GET','POST'])
@@ -108,6 +114,8 @@ def main_view():
             # 회원인경우 결과를 기반으로 DB에 정보저장해준다.
             if 'user_id' in session:
                 print(simlityDAO.check_result(userid=session['user_id']))
+                Customer_DAO.add_temp(session['user_id'],1.5)
+                session['temp'] = Customer_DAO.get_temp(session['user_id'])[0]
                 print(session['user_id'])
                 if simlityDAO.check_result(userid=session['user_id']):
                     # simlityDAO.update_result
@@ -159,12 +167,26 @@ def list_share():
 def update_person():
     return render_template('Myinform.html')
 #  get all은 쪽지함 조회 클릭시 기본적으로 보여주는 곳
-@app.route('/note/all',methods=['GET','POST'])
-def notes():
+@app.route('/note/send',methods=['GET','POST'])
+def note_send():
     if 'user_id'in session:
-        return render_template('receivenote.html')
-    else:     
-        return redirect('/main',406)
+        return render_template('sendnote.html')
+    else:
+        return redirect(url_for('login'))
+@app.route('/note/receive',methods=['GET','POST'])
+def note_receive():
+    if 'user_id'in session:
+
+        temp= Note_Dao.view_receive(session['user_id'])
+        result = []
+        for i in range(len(temp)):
+            print(temp[i][2])
+        print(result)
+        return render_template('receivenote.html',result = temp)
+
+    else:
+        return redirect(url_for('main_veiw'))
+
 @app.route('/logout',methods=['GET','POST'])
 def logout():
     session.clear()
@@ -186,4 +208,5 @@ import os
 if __name__== '__main__':
     app.secret_key = 'super secret key'
     app.config['SESSION_TYPE'] = 'filesystem'
-    app.run(debug = True, port=8080,ssl_context='adhoc')
+    # app.run(debug = True, port=8080,ssl_context='adhoc')
+    app.run(debug = True, port=8080)

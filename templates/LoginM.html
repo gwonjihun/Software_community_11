@@ -86,15 +86,15 @@ body {
   <form>
   	<header class="header">
 			<div class="head">
-				<h1>닮는 것을 담다</h1>
+				<a href="{{url_for('main_view')}}"><h1>닮는 것을 담다</h1></a>
 				<nav class="navi">
-					<a href="#">자유 게시판</a>
-					<a href="#">결과 게시판</a>
+					<a href="{{url_for('list_free')}}">자유 게시판</a>
+					<a href="{{url_for('list_share')}}">결과 게시판</a>
 				</nav>
 			</div>
 			<div class="side_menu">
-				<a href="#">로그인</a>
-				<a href="#">회원가입</a>
+				<a href="{{url_for('login')}}">로그인</a>
+				<a href="{{url_for('register')}}">회원가입</a>
 			</div>
 		</header>
     <img class="mb-4" src="../static/img/loco.png" alt="" width="150" height="150">
@@ -126,5 +126,13 @@ body {
  
   </form>
 </main>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+	  <script>
+		  alert("{{messages[-1]}}")
+	  </script>
+{% endif %}
+  {% endwith %}
+
  </body>
 </html>
