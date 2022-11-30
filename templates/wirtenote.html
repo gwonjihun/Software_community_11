@@ -65,13 +65,14 @@ cursor:pointer;
   <div class="container">
     <div class="main">
       <div class="title">
-        <div id="tit_font">쪽지보내기</div>
+        <div id="tit_font">쪽지보내기 <br>전송 대상 : {{receive_id}}</div>
         <div class="c_box">
           <div class="close">X</div>
         </div>
       </div>
-        <form class="m_box">
-          <textarea id="message" wrap="physical" cols="30" rows="5"placeholder="내용을 입력해주세요(최대50글자)"></textarea>
+        <form class="m_box" action="{{url_for('note_write')}}" method="POST" >
+          <input type="hidden" name="receive_id" value="{{receive_id}}">
+          <textarea id="message" wrap="physical" name="content" cols="30" rows="5"placeholder="내용을 입력해주세요(최대50글자)"></textarea>
           <br>
           <div class="s_box">
             <input id="send" type = "submit" value ="전송" style="color:white;">
@@ -79,16 +80,6 @@ cursor:pointer;
         </form>
     </div>
   </div>
-  <!-- x버튼을 누르면 화면이 꺼지게 -->
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-  <script>
-    $(".close").click(function(){
-        //팝업 창인 상태라면
-        //window.close();
 
-        //레이어 팝업인 상태라면
-        $(".container").hide();
-    })
-  </script>
 </body>
 </html>

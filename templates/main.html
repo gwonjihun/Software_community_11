@@ -24,7 +24,7 @@
 			<div class="side_menu">
 				{% if session["user_id"] %}
 					<div class="loginInfo">
-						<a href="#">{{ session['user_id'] }}</a>
+						<a href="{{url_for('get_simliarity')}}">{{ session['user_id'] }}</a>
 						{{ session['temp']}} °C	 
 						<a href="{{url_for('update_person')}}">개인정보 수정</a>
 						<a id = 'note' onclick = "show()">쪽지함</a>

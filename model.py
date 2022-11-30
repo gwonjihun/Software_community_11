@@ -16,6 +16,8 @@ class Customer_DAO:
         print(sql)
         try:
             curs.execute(sql)
+            print("@@@@@@@@@@@@@@@@@@@@@@2")
+            print("update succ")
         except:
             print("cutomser update error!")
             return []
@@ -125,44 +127,31 @@ class Customer_DAO:
 class Note_Dao:
     def __init__(self): 
         pass
-    def send_note(sender_id,receiver_id, title, content,create_at):
+    def send_note(sender_id,receiver_id, content,create_at):
         db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         tdb = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')
         curs = db.cursor()
         
-        sql = f'''insert customers values(null,"{sender_id}", "{receiver_id}", "{content}", "{create_at}");'''
+        sql = f'''insert into note_table values(null,"{sender_id}", "{receiver_id}", "{content}", "{create_at}",null);'''
         print(sql)
         try:
             curs.execute(sql)
         except:
             db.close()
+            print('note insert failed')
             return False
         db.commit()
         db.close()
+        print('note insert suc')
         return True
-    # 보낸 쪽지함 조회
+
+    # 보낸 쪽지 조회
     def view_send(sender_id):
         db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         tdb = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')
         curs = db.cursor()
         
-        sql =f'''select receiver_id,  create_at from note_table where sender_id = "{sender_id}" order by create_at desc;'''
-        try:
-            curs.execute(sql)
-            result = curs.fetchall()
-        except:
-            db.close()
-            return []
-        db.close()    
-        return result
-
-    # 수신 쪽지 내용 조회
-    def receive_notes(sender_id):
-        db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
-        tdb = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')
-        curs = db.cursor()
-        
-        sql =f'''select sender_id,  content, create_at from note_table where sender_id = "{sender_id}" order by create_at desc;'''
+        sql =f'''select receiver_id, content, create_at from note_table where sender_id = "{sender_id}" order by create_at desc;'''
         try:
             curs.execute(sql)
             result = curs.fetchall()
@@ -178,7 +167,7 @@ class Note_Dao:
         tdb = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')
         curs = db.cursor()
         
-        sql =f'''select receiver_id, content, create_at from note_table where sender_id = "{sender_id}" order by create_at desc;'''
+        sql =f'''select sender_id, content, create_at from note_table where receiver_id = "{sender_id}" order by create_at desc;'''
         try:
             curs.execute(sql)
             result = curs.fetchall()
@@ -190,26 +179,47 @@ class Note_Dao:
 
     # 보낸 쪽지 삭제 보낸 쪽지 리스트는 지울 수 없음
     # but, 수신자는 해당 쪽지를 지울 수 있음
-    def delete_note(sender_id, receiver_id, title, content):
+    def delete_note(sender_id, receiver_id, content, create_at):
         db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         tdb = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')
         curs = db.cursor()
         
-        sql =f'''select receiver_id, content, create_at from note_table where sender_id = "{sender_id}" order by create_at desc;'''
+        sql =f'''delete from note_table where sender_id = "{sender_id}" and receiver_id = "{receiver_id}" and content = "{content}" and create_at="{create_at}";'''
+        print(sql)
         try:
             curs.execute(sql)
-            result = curs.fetchall()
-        except:
+        except Exception as e:
+            print(e)
             db.close()
-            return []
+        print('delete finish')
+        db.commit()
         db.close()    
-        return result
     
 from datetime import datetime
 
 class simlityDAO:
     def __init__(self): 
         pass
+    
+    def result_get(userid):
+        db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
+        tdb = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')
+        curs = db.cursor()
+        sql = f'''select * from similarity_table where user_id = "{userid}"'''
+        try:
+            curs.execute(sql)
+            result = curs.fetchone()
+        except Exception as e :
+            print(e)
+            db.close()
+            print('similarity table data searach failed')
+            return []
+        print("ERQWERQWERQWERQWERQWERQWERQWER")
+        print(result)
+        db.commit()
+        db.close()
+        return result
+
     def check_result(userid):
         db = pymysql.connect(host='localhost',user='root',password='1q2w3e4r',db='main')
         tdb = pymysql.connect(host='software-webservice-11.mysql.database.azure.com',user='roots',password='rnjswlgns1!',db='main',ssl_ca='./static/cert/DigiCertGlobalRootCA.crt.pem')

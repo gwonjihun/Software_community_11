@@ -98,6 +98,7 @@ def main_view():
             # save_to = f'static/img/profiles/{user_id}'
             f.save(save_to)
             result = predictor.predict_img(gender,save_to)
+            print(result)
             # 결과가 없는 경우 바로 alert창 나오는 영역
             if os.path.isfile(save_to):
                 os.remove(save_to)
@@ -133,25 +134,18 @@ def main_view():
             return render_template('main.html')
     else:
         return render_template('main.html')
-# @app.route('/mypage/update', methods=['POST'])
-#     # if session['user_id']:
-#     #     if request.
-#     # else:
-#     #     return redirect('/')
 
-# get -> 마이페이지 출력
-# post ->user정보 수정
-# @app.route('/info',methods=['GET','POST'])
-# def mypage():
-#     if session['user_id']:
-#         if request.method =='POST':
-#             print()
-#         elif request.method =='GET':
-#             print()
-#             return render_template('mypage.html')
-#     else:
-#         #  세션이 존재 x이면 닮은꼴 입력하는 초기 화면으로 진행한다.
-#         return redirect('/main')
+@app.route('/simliarity',methods=['GET'])
+def get_simliarity():
+    if 'user_id' in session:
+        user_id = session['user_id']
+        result= simlityDAO.result_get(user_id)
+        print(result)
+        # '박보검', 73.59, '김수현', 19.0, '문빈', 2.92, '송강', 2.29, '정국', 1.12,
+        return render_template('mainresult.html',results=result)
+    else:
+        return redirect(url_for('main_view'))
+
 @app.route('/person',methods=['GET'])
 def person():
     return render_template('pri.html')
@@ -170,22 +164,74 @@ def update_person():
 @app.route('/note/send',methods=['GET','POST'])
 def note_send():
     if 'user_id'in session:
-        return render_template('sendnote.html')
+        result = Note_Dao.view_send(session['user_id'])
+        return render_template('sendnote.html',result=result)
     else:
-        return redirect(url_for('login'))
+        return '''
+            <script>
+            window.close()
+            </script>
+        '''
+
 @app.route('/note/receive',methods=['GET','POST'])
 def note_receive():
     if 'user_id'in session:
 
         temp= Note_Dao.view_receive(session['user_id'])
-        result = []
-        for i in range(len(temp)):
-            print(temp[i][2])
-        print(result)
+        
         return render_template('receivenote.html',result = temp)
+    else:
+        return '''
+            <script>
+            window.close()
+            </script>
+        '''
+
+@app.route('/note/write',methods=['GET','POST'])
+def note_write():
+    current_at = datetime.now()
+    current_at = current_at.strftime('%Y-%m-%d %H:%M:%S')
+    if 'user_id' in session:
+        if request.method =='POST':
+            content = request.form['content']
+            receive_id = request.form['receive_id']
+            print(content,receive_id)
+            Note_Dao.send_note(session['user_id'],receive_id,content,current_at)
+            Customer_DAO.add_temp(session['user_id'],-5.0)
+            session['temp'] = Customer_DAO.get_temp(session['user_id'])[0]
+            print("session : ", session['temp'])
+            return redirect(url_for('note_send'))
+        else:
+            receive_id = request.args.get('receive_id')
+            return render_template('wirtenote.html',receive_id =receive_id)
 
     else:
-        return redirect(url_for('main_veiw'))
+        return '''
+            <script>
+            window.close()
+            </script>
+        '''
+    
+# kind=1이면 받은 메세지
+# kind=0이면 보낸 메세지 삭제
+@app.route('/note/delete',methods=['GET'])
+def note_delete():
+    if 'user_id' in session:
+        id = request.args.get('id')
+        content = request.args.get('content')
+        create_at = request.args.get('create_at')
+        # print(create_at)
+        # create_at = datetime.strptime(create_at, '%Y-%m-%d %H:%M:%S')
+        kind= request.args.get('kind')
+        if kind == '1':
+            Note_Dao.delete_note(id,session['user_id'],content,create_at)
+            return redirect(url_for('note_receive'))
+        else:
+            Note_Dao.delete_note(session['user_id'],id,content,create_at)
+            return redirect(url_for('note_send'))
+    else:
+        return redirect(url_for('main_view'))    
+
 
 @app.route('/logout',methods=['GET','POST'])
 def logout():

@@ -28,8 +28,8 @@
     }
     .subtitle >form > button {
         position: relative;
-        bottom: 44px;
-        left : 85px;
+        bottom: -2px;
+        left : -20px;
         border-radius:30px;
         border:1px solid #008CBA;
         background-color: white;
@@ -38,10 +38,14 @@
         font-size: 16px;
         letter-spacing: 1px;
     }
+    
+    .subtitle > .sends {
+      position: relative;
+      left : 110px;
+      bottom: 44px;
+    }
     .subtitle > form > button.selected {
         position: relative;
-        bottom: 0px;
-        left : -20px;
         background-color: #008CBA;
         color: white;
     }
@@ -219,31 +223,35 @@
                 <form action="{{url_for('note_receive')}}" >
                   <button class="button selected" >받은쪽지</button>
                 </form>
-                <form action = "{{url_for('note_send')}}" method="GET">
+                <form action = "{{url_for('note_send')}}" method="GET" class ="sends">
                   <button class="button" >보낸쪽지</button>
                 </form>
             </ul>
         </nav>
         <main>
           <div class="mail-list">
-
             {% for j in result %}
               <div class="mail-row">
-                <div class="profile">{{j[0]}}</div>
+                <div class="profile" id='{{j[0]}}'> {{j[0]}} </div>
                   <div class="content_1">
                     <div class="content">
-                        <div class="info">{{j[2]}}</div>
+                        <div class="info"> {{j[2]}} </div>
                     </div>
-                    <div class="c-chat">{{j[1]}}</div>
+                    <div class="c-chat"> {{j[1]}} </div>
                   </div>
                     <div class="s_c">
-                      <a href="#open"><i id="send" class="icon-forward"></i></a>&emsp;&emsp;&emsp;
-                      <bottom id="cancell" class="icon-trash-empty"></bottom>
+                      <a href="{{url_for('note_write',receive_id=j[0] )}}"><i id="send" class="icon-forward"></i></a>&emsp;&emsp;&emsp;
+                      <a href="{{url_for('note_delete',id=j[0],content=j[1],create_at=j[2],kind=1 )}}" id="cancell" class="icon-trash-empty"></a>
                     </div>
                 </div>
-              </div>
+                <script>
+                  function test(){
+                    alert('{{j[0]}}')
+                  }
+                </script> 
             {% endfor %}
-          </div>
+              </div>    
+      </div>
         </main>
 
         <footer>
@@ -259,7 +267,7 @@
       <div> 쪽지보내기 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; </div> <div><a href="#close">X</a></div>
     </div>
       <form class="m_box">
-        <input type="hidden" name=receiver value="">
+        <input type="hidden" id="receiver" name=receiver value="">
         <textarea id="message" name=content wrap="physical" cols="30" rows="5"placeholder="내용을 입력해주세요(최대50글자)"></textarea>
         <br>
         <div class="s_box">
