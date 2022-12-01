@@ -77,10 +77,6 @@ def login():
             return redirect(url_for('login'))
     return render_template('loginM.html',msg='testing now')
 
-@app.route('/myresult',methods=['GET','POST'])
-def get_result():
-    if 'user_id' in session:
-        return render_template('mainresult.html')
 
 
 @app.route('/',methods=['GET','POST'])
@@ -139,10 +135,16 @@ def main_view():
 def get_simliarity():
     if 'user_id' in session:
         user_id = session['user_id']
-        result= simlityDAO.result_get(user_id)
-        print(result)
+        resu= simlityDAO.result_get(user_id)
+        print(resu)
+        img_src = simlityDAO.find_people(resu[2])
+        result_si = []
+        for i in range(0,5):
+            a,b = resu[2*(i+1)],resu[2*(i+1)+1]
+            result_si.append((b,a))
+        print(result_si)
         # '박보검', 73.59, '김수현', 19.0, '문빈', 2.92, '송강', 2.29, '정국', 1.12,
-        return render_template('mainresult.html',results=result)
+        return render_template('mainresult.html',imgsrc=img_src,results=result_si)
     else:
         return redirect(url_for('main_view'))
 

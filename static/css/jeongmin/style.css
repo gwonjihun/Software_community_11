@@ -91,9 +91,11 @@ a:hover {
 }
 
 .share {
+	text-align: center;
 	margin: 2em 0;
 }
-.share a {
+.share button {
+	text-align: center;
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
@@ -105,8 +107,11 @@ a:hover {
 	color: #fff;
 
 }
-
+.btn {
+	text-align: center;
+}
 .btn a {
+	text-align: center;
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
